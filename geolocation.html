@@ -11,8 +11,7 @@ if (navigator.geolocation) {
 }
 
 function showPosition(position) {
-	//z = Math.round(Math.log2(40075017 / position.coords.accuracy * Math.cos(position.coords.latitude * 0.017453292519943295)));
-	z = 15;
+	z = Math.round(Math.log2(40075017 / position.coords.accuracy * Math.cos(position.coords.latitude * 0.017453292519943295)));
 	x = Math.floor(((position.coords.longitude + 180) / 360) * Math.pow(2, z));
 	y = Math.floor((1 - Math.log(Math.tan(position.coords.latitude * 0.017453292519943295) + 1 / Math.cos(position.coords.latitude * 0.017453292519943295)) / Math.PI) / 2 * Math.pow(2, z));
 
