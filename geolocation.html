@@ -12,14 +12,15 @@ if (navigator.geolocation) {
 
 function showPosition(position) {
 	z = Math.round(Math.log2(40075017 / position.coords.accuracy * Math.cos(position.coords.latitude * 0.017453292519943295)));
+    z = z < 21 ? z : 21;
 	x = Math.floor(((position.coords.longitude + 180) / 360) * Math.pow(2, z));
 	y = Math.floor((1 - Math.log(Math.tan(position.coords.latitude * 0.017453292519943295) + 1 / Math.cos(position.coords.latitude * 0.017453292519943295)) / Math.PI) / 2 * Math.pow(2, z));
 
     document.getElementById("demo").innerHTML = "<img src=\"https://www.google.com/maps/vt/pb=!1m4!1m3!1i" + z + "!2i" + x + "!3i" + y + "!2m3!1e0!2sm!3i0!3m7!2sen!5e0!12m4!1e68!2m2!1sset!2sTerrain!4e0!5m1!1e0!23i0\"><br>";
-    document.getElementById("demo").innerHTML += "Latitude: " + position.coords.latitude + "<br>";
-    document.getElementById("demo").innerHTML += "Longitude: " + position.coords.longitude + "<br>";
+    document.getElementById("demo").innerHTML += "Latitude: " + Math.round(position.coords.latitude, 4) + "<br>";
+    document.getElementById("demo").innerHTML += "Longitude: " + Math.round(position.coords.longitude, 4) + "<br>";
     document.getElementById("demo").innerHTML += "Accuracy: " + position.coords.accuracy + "<br>";
-    document.getElementById("demo").innerHTML += "Altitude: " + position.coords.altitude + "<br>";
+    document.getElementById("demo").innerHTML += "Altitude: " + Math.round(position.coords.altitude) + "<br>";
     document.getElementById("demo").innerHTML += "Accuracy: " + position.coords.altitudeAccuracy + "<br>";
     document.getElementById("demo").innerHTML += "Heading: " + position.coords.heading + "<br>";
     document.getElementById("demo").innerHTML += "Speed: " + position.coords.speed + "<br>";
